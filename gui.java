@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class gui extends Application{
+    public static Scene currentScene;
     public static void gui_main(String[] args) {
         launch(args);
     }  
@@ -16,6 +17,7 @@ public class gui extends Application{
         stage.setTitle("owo");
         Scene scene = new Scene(root,500,450);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        currentScene = scene;
         stage.setScene(scene);
 
         stage.show();

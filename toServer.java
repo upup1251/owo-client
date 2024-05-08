@@ -5,6 +5,10 @@ import java.net.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.TextArea;
 public class toServer extends Thread{
     private InetAddress severIP;
     private int severPORT;
@@ -45,16 +49,18 @@ public class toServer extends Thread{
         }
         
     }
-    public String getMessage(){
+    public void getMessage(){
         try{
             ObjectInputStream ois = new ObjectInputStream(scoket.getInputStream());
             message messageRecvied = (message)ois.readObject();
-            System.out.println(messageRecvied.getSender()+":"+messageRecvied.getMessage());
-            return messageRecvied.getMessage();
+            String message = messageRecvied.getSender()+":"+messageRecvied.getMessage();
+            System.out.println(message);
+            //通过当前场景通过控件id获取控件
+            TextArea messageDisplay = (TextArea)gui.currentScene.lookup("#messageDisplay");
+            messageDisplay.appendText(message+"\n");
         }
         catch(Exception e){
             e.printStackTrace();
-            return null;
         }
     }
 }

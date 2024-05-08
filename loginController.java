@@ -35,6 +35,7 @@ public class loginController{
             Parent root = FXMLLoader.load(getClass().getResource("message.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage)loginButton.getScene().getWindow();
+            gui.currentScene = scene;
             stage.setScene(scene);
         }
     }

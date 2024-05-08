@@ -17,7 +17,7 @@ public class Login {
             statement = sqls.getCon().prepareStatement(sql);
             statement.setString(1,String.format("%05d", usrs_num));
             Main.mine.setOwo_no(String.format("%05d", usrs_num));
-            statement.setString(2, Main.mine.getPassowrd());
+            statement.setString(2, Main.mine.getPassword());
             statement.executeUpdate();
         }
         catch(Exception e){
@@ -35,7 +35,7 @@ public class Login {
             statement.setString(1, Main.mine.getOwo_no());
             ResultSet rs = statement.executeQuery();
             if(rs.next()){
-                if(rs.getString("password").equals(Main.mine.getPassowrd())){
+                if(rs.getString("password").equals(Main.mine.getPassword())){
                     System.out.println("login successfully!");
                     return true;
                 }

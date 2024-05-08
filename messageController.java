@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -25,9 +26,5 @@ public class messageController {
         messageDisplay.appendText(Main.mine.getOwo_no()+':'+messageInput.getText()+"\n");
         messageInput.clear();
     }
-
-    @FXML
-    public  void getMessage(String message){
-        messageDisplay.appendText(message);
-    }
+    
 }
