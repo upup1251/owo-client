@@ -9,12 +9,22 @@ import javafx.stage.Stage;
 
 public class gui extends Application{
     public static void gui_main(String[] args) {
-        launch();
+        launch(args);
     }  
     public void start(Stage stage) throws Exception {
         Parent root =FXMLLoader.load(getClass().getResource("login.fxml"));
         stage.setTitle("owo");
-        stage.setScene(new Scene(root,500,450));
+        Scene scene = new Scene(root,500,450);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        stage.setScene(scene);
+
         stage.show();
+    }
+    public void init(){
+        try{
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

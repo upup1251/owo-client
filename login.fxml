@@ -9,11 +9,10 @@
 
 <AnchorPane fx:controller="loginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="159.0" layoutY="334.0" mnemonicParsing="false" text="注册" />
-      <TextField layoutX="159.0" layoutY="193.0" prefHeight="23.0" prefWidth="182.0" promptText="请输入账号" />
+      <Button styleClass="my-button" fx:id="register_button" layoutX="159.0" layoutY="334.0" mnemonicParsing="false" onAction="#toRegister" text="注册" />
+      <TextField fx:id="text_owo_no" layoutX="159.0" layoutY="193.0" prefHeight="23.0" prefWidth="182.0" promptText="请输入账号" />
       <Button fx:id="loginButton" layoutX="301.0" layoutY="334.0" mnemonicParsing="false" onAction="#loginIn" text="登录" />
       <Label layoutX="237.0" layoutY="119.0" text="owo" />
-      <PasswordField layoutX="159.0" layoutY="253.0" prefHeight="23.0" prefWidth="182.0" promptText="请输入密码" />
+      <PasswordField fx:id="text_password" layoutX="159.0" layoutY="253.0" prefHeight="23.0" prefWidth="182.0" promptText="请输入密码" />
    </children>
 </AnchorPane>
-

@@ -29,12 +29,9 @@ public class toServer extends Thread{
         catch(Exception e){
             e.printStackTrace();
         }
-        cout(1,"00008","hello 00008");
         while (true) {
             getMessage();
         }
-        //cout(1, "00000", "hello world");
-        
     }
     public void cout(int type,String accepter,String message){
         message messageToSend = new message(type,Main.mine.getOwo_no(),accepter,message);
