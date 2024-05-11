@@ -5,6 +5,10 @@ public class message implements Serializable{
     //type == 0 :用户连接到服务器时将把自己的owo_no发送给服务器用于创建chatSocket对象
     //1:message
     //2:accepter不在线
+    //3:发送心跳包
+    //4:回复心跳包
+    //5:个人信息更新
+    //6:发送图片到服务器
     private String sender;
     private String accepter;
     private String message;

@@ -22,26 +22,6 @@ public class Main{
 
     public static void main(String[] args) {
         gui.gui_main(args);
-        //try{
-            //通过ip地址和端口号进行连接
-
-            //String ip = "127.0.0.1";
-            //int port = 40801;
-            //toServer  toserver = new toServer(ip, port);
-            //toserver.run();
-
-            //OutputStream os = socket.getOutputStream();
-            //try (Scanner scanner = new Scanner(System.in)) {
-                //String str = scanner.next();
-                //os.write(str.getBytes());
-            //}
-            
-        //}
-        //catch(Exception e){
-            //e.printStackTrace();
-        //}
-        //finally{
-        //}
     }
 
 }

@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="login_control" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="findPasswd_control" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="button_top" layoutX="-2.0" onMousePressed="#handleMousePressed" onMouseDragged="#handleMouseDragged" mnemonicParsing="false" prefHeight="57.0" prefWidth="500.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" textFill="#7d7878" AnchorPane.topAnchor="-10.0" />
     <Button fx:id="button_exit" onMouseClicked="#exit"  layoutX="451.0" layoutY="6.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="16.0" style="-fx-background-color: transparent; ">
@@ -32,54 +30,36 @@
             </ImageView>
          </graphic>
       </Button>
+ 
       <Label layoutX="-160.0" layoutY="204.0" rotate="90.0" text="WELCOME BACK TO OWO" textFill="#20ff3a">
          <font>
             <Font name="System Bold Italic" size="32.0" />
          </font>
       </Label>
       <TextField fx:id="text_no" alignment="CENTER" layoutX="179.0" layoutY="201.0" onKeyPressed="#toPasswdInput" prefHeight="24.0" prefWidth="142.0" promptText="请输入账号" style="-fx-border-color: white; -fx-background-color: black; -fx-border-width: 0 0 0.5 0;" />
-      <PasswordField fx:id="text_passwd" alignment="CENTER" layoutX="179.0" layoutY="264.0" onKeyPressed="#login" prefHeight="24.0" prefWidth="142.0" promptText="请输入密码" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 0 0 0.5 0;" />
-      <Button id="button_login" fx:id="button_login" layoutX="217.0" layoutY="340.0" mnemonicParsing="false" onAction="#loginInto" style="-fx-background-color: gray; -fx-background-radius: 5;" text="登录" textFill="WHITE">
+      <PasswordField fx:id="text_passwd" alignment="CENTER" layoutX="179.0" layoutY="264.0" onKeyPressed="#finpassowrd" prefHeight="24.0" prefWidth="142.0" promptText="请输入备用密码" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 0 0 0.5 0;" />
+      <Button id="button_login" fx:id="button_findPassword" layoutX="205.0" layoutY="339.0" mnemonicParsing="false" onMouseClicked="#findpassword" style="-fx-background-color: gray; -fx-background-radius: 5;" text="找回密码" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="./src/icons8-login-64.png" />
+                  <Image url="./src/icons8-search-48.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
       <ImageView fx:id="avatar" disable="true" fitHeight="66.0" fitWidth="68.0" layoutX="217.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="./src/icons8-heart-64.png" />
+            <Image url="./src/icons8-password-100.png" />
          </image>
       </ImageView>
-      <MenuButton layoutX="465.0" layoutY="420.0" mnemonicParsing="false" popupSide="TOP" style="-fx-background-color: black;" textFill="WHITE">
-        <items>
-          <MenuItem fx:id="button_register" mnemonicParsing="false" onAction="#button_register" text="注册账号">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="./src/icons8-registered-trademark-64.png" />
-                     </image>
-                  </ImageView>
-               </graphic></MenuItem>
-          <MenuItem fx:id="button_forget" mnemonicParsing="false" onAction="#getPassword" text="忘记密码">
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="./src/icons8-password-100.png" />
-                     </image>
-                  </ImageView>
-               </graphic></MenuItem>
-        </items>
+      <Button fx:id="button_home" layoutX="451.0" layoutY="409.0" mnemonicParsing="false" onMouseClicked="#goHome" style="-fx-background-color: black;">
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="./src/icons8-help-64.png" />
+                  <Image url="./src/icons8-home-48.png" />
                </image>
             </ImageView>
          </graphic>
-      </MenuButton>
+      </Button>
    </children>
 </AnchorPane>
-

@@ -4,39 +4,59 @@ import java.sql.PreparedStatement;
 
 public class Login {
     Login(){}
-    public static boolean register(String password){
+    public static boolean register(String name,String contact,String password,String passwd2,String avatarPath){
         Main.mine.setPasswword(password);
-        connectToSql sqls = new connectToSql();
         String sql = "select count(*) counts from usr";
         try{
-            PreparedStatement statement = sqls.getCon().prepareStatement(sql);
+            PreparedStatement statement = Main.sqls.getCon().prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             rs.next();
             int usrs_num = rs.getInt("counts");
-            sql = "insert into usr values(?,?)";
-            statement = sqls.getCon().prepareStatement(sql);
+            sql = "insert into usr values(?,?,?,?,?,?)";
+            statement = Main.sqls.getCon().prepareStatement(sql);
+
             statement.setString(1,String.format("%05d", usrs_num));
             Main.mine.setOwo_no(String.format("%05d", usrs_num));
-            statement.setString(2, Main.mine.getPassword());
+            statement.setString(2,name);
+            Main.mine.setName(name);
+            statement.setString(3, contact);
+            Main.mine.setContact(contact);
+            statement.setString(4, password);
+            Main.mine.setPasswword(password);
+            statement.setString(5, passwd2);
+            Main.mine.setPasswd2(passwd2);
+            String avatarPathInService;
+            avatarPathInService = "./src/usrsavatar/"+Main.mine.getOwo_no()+".png";
+            statement.setString(6, avatarPathInService);
+            Main.mine.setAvatarPath(avatarPath);
             statement.executeUpdate();
+            
+            login(String.format("%05d", usrs_num), password);
+            Main.server.cout(1, "00000", Main.mine.getOwo_no());
+            //登录后再进行文件传输
+            Main.server.sendAvatar(avatarPath);
         }
         catch(Exception e){
             e.printStackTrace();
         }
         return true;
     }
+
+
     public static boolean login(String owo_no,String password){
         Main.mine.setOwo_no(owo_no);
         Main.mine.setPasswword(password);
-        connectToSql sqls = new connectToSql();
-        String sql = "select password from usr where owo_no = ?";
+        String sql = "select * from usr where id = ?";
         try{
-            PreparedStatement statement = sqls.getCon().prepareStatement(sql);
+            PreparedStatement statement = Main.sqls.getCon().prepareStatement(sql);
             statement.setString(1, Main.mine.getOwo_no());
             ResultSet rs = statement.executeQuery();
             if(rs.next()){
                 if(rs.getString("password").equals(Main.mine.getPassword())){
                     System.out.println("login successfully!");
+                    Main.mine.setName(rs.getString("username"));
+                    Main.mine.setPasswd2("alt_password");
+                    Main.mine.setAvatarPath("./src/useravatar/"+owo_no+".png");
                     return true;
                 }
                 else{
