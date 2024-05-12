@@ -36,7 +36,7 @@
             <Font name="System Bold Italic" size="32.0" />
          </font>
       </Label>
-      <PasswordField fx:id="text_passwd" alignment="CENTER" layoutX="88.0" layoutY="261.0" onKeyPressed="#toTextpasswd2" prefHeight="24.0" prefWidth="142.0" promptText="请输入密码" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 0 0 0.5 0;" />
+      <PasswordField fx:id="text_passwd" alignment="CENTER" layoutX="88.0" layoutY="261.0" onKeyPressed="#toTextpasswd2" prefHeight="24.0" prefWidth="142.0" promptText="请输入密码" style="-fx-background-color: black;-fx-text-fill:white;  -fx-border-color: white; -fx-border-width: 0 0 0.5 0;" />
       <Button id="button_login" fx:id="button_login" layoutX="230.0" layoutY="345.0" mnemonicParsing="false" onAction="#register"  style="-fx-background-color: gray; -fx-background-radius: 5;" text="注册" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -59,9 +59,9 @@
 
 
 
-      <TextField fx:id="text_contact" alignment="CENTER" layoutX="283.0" layoutY="189.0" onKeyPressed="#toPasswdInput" prefHeight="24.0" prefWidth="142.0" promptText="请输入联系方式" style="-fx-border-color: white; -fx-background-color: black; -fx-border-width: 0 0 0.5 0;" />
-      <TextField fx:id="text_name" alignment="CENTER" layoutX="88.0" layoutY="189.0" onKeyPressed="#toTextContact" prefHeight="24.0" prefWidth="142.0" promptText="请输入名字" style="-fx-border-color: white; -fx-background-color: black; -fx-border-width: 0 0 0.5 0;" />
-      <TextField fx:id="text_passwd2" alignment="CENTER" layoutX="283.0" layoutY="261.0" onKeyPressed="#toregister" prefHeight="24.0" prefWidth="142.0" promptText="请输入备用密码" style="-fx-border-color: white; -fx-background-color: black; -fx-border-width: 0 0 0.5 0;" />
+      <TextField fx:id="text_contact" alignment="CENTER" layoutX="283.0" layoutY="189.0" onKeyPressed="#toPasswdInput" prefHeight="24.0" prefWidth="142.0" promptText="请输入联系方式" style="-fx-border-color: white; -fx-text-fill:white;  -fx-background-color: black; -fx-border-width: 0 0 0.5 0;" />
+      <TextField fx:id="text_name" alignment="CENTER" layoutX="88.0" layoutY="189.0" onKeyPressed="#toTextContact" prefHeight="24.0" prefWidth="142.0" promptText="请输入名字" style="-fx-border-color: white; -fx-background-color: black;-fx-text-fill:white;  -fx-border-width: 0 0 0.5 0;" />
+      <TextField fx:id="text_passwd2" alignment="CENTER" layoutX="283.0" layoutY="261.0" onKeyPressed="#toregister" prefHeight="24.0" prefWidth="142.0" promptText="请输入备用密码" style="-fx-border-color: white; -fx-background-color: black;-fx-text-fill:white;  -fx-border-width: 0 0 0.5 0;" />
 
       <Button fx:id="button_home" layoutX="451.0" layoutY="409.0" mnemonicParsing="false" onAction="#goHome" style="-fx-background-color: black;">
          <graphic>

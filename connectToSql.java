@@ -1,4 +1,10 @@
 import java.sql.*;
+import java.io.File;
+import java.io.IOException;
+
+import com.mysql.cj.callback.FidoAuthenticationCallback;
+import com.mysql.cj.protocol.Resultset;
+import com.mysql.cj.xdevapi.PreparableStatement;
 
 public class connectToSql {
     private Connection con;
@@ -7,6 +13,7 @@ public class connectToSql {
     private String usr;
     private String passwrd;
     private String url;
+    private PreparedStatement prestatement;
     public connectToSql(){
         deiver = "com.mysql.cj.jdbc.Driver";
         usr = "upupup";
@@ -48,5 +55,70 @@ public class connectToSql {
     }
     public Connection getCon(){
         return con;
+    }
+    public void getMessage() throws IOException{
+        String sql = "select * from message where accpter=?";
+        try {
+            prestatement = con.prepareStatement(sql);
+            prestatement.setString(1, Main.mine.getOwo_no());
+            ResultSet rs = prestatement.executeQuery();
+            while (rs.next()) {
+                message messageToTake = new message(Integer.parseInt(rs.getString("type")), rs.getString("sender"), rs.getString("accpter"), rs.getString("message"));
+                Main.server.messageDO(messageToTake);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void getFriendList(){
+        String sql = "select usr1 from friend where usr2=?";
+        try {
+            prestatement = con.prepareStatement(sql);
+            prestatement.setString(1, Main.mine.owo_no);
+            ResultSet rs = prestatement.executeQuery();
+            while (rs.next()) {
+                String usr1_owo = rs.getString("usr1");
+                String usr1beizhu = rs.getString("beizhu1");
+                sql = "select username,contact from usr where id=?";
+                prestatement = con.prepareStatement(sql);
+                prestatement.setString(1, usr1_owo);
+                rs = prestatement.executeQuery();
+                String avatarPath = "./src/useravatar/"+usr1_owo+".png";
+                File file = new File(avatarPath);
+                if(file.exists()){
+                    friend.friends.add(new friend(usr1_owo, rs.getString("username"), usr1beizhu, rs.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
+                }
+                else{
+                    Main.server.getAvatar(usr1_owo);
+                    friend.friends.add(new friend(usr1_owo, rs.getString("username"), usr1beizhu, rs.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
+                }
+            }
+            sql = "select usr2 from friend where usr1=?";
+            prestatement = con.prepareStatement(sql);
+            prestatement.setString(1, Main.mine.owo_no);
+            rs = prestatement.executeQuery();
+            while (rs.next()) {
+                String usr1_owo = rs.getString("usr1");
+                String usr1beizhu = rs.getString("beizhu1");
+                sql = "select username,contact from usr where id=?";
+                prestatement = con.prepareStatement(sql);
+                prestatement.setString(1, usr1_owo);
+                rs = prestatement.executeQuery();
+                String avatarPath = "./src/useravatar/"+usr1_owo+".png";
+                File file = new File(avatarPath);
+                if(file.exists()){
+                    friend.friends.add(new friend(usr1_owo, rs.getString("username"), usr1beizhu, rs.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
+                }
+                else{
+                    Main.server.getAvatar(usr1_owo);
+                    friend.friends.add(new friend(usr1_owo, rs.getString("username"), usr1beizhu, rs.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
+                }
+
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

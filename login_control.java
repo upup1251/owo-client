@@ -59,6 +59,9 @@ public class login_control {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+
+
 
     }
 
@@ -101,9 +104,17 @@ public class login_control {
     @FXML
     void loginInto(ActionEvent event) {
         if(Login.login(text_no.getText(), text_passwd.getText())){
-            //连接服务器
-            //Main.server = new toServer(Main.ip,Main.port);
             Main.server.start();
+            System.out.println("message getted service already start.");
+            Main.sqls.getFriendList();
+            System.out.println("friendList already get.");
+            try {
+                Main.sqls.getMessage();
+                System.out.println("offline message already get.");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             //切换场景
             Parent root;
             try {

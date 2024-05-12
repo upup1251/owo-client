@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,90 +11,59 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:controller="message1_control" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="button_top" layoutX="-2.0" onMousePressed="#handleMousePressed" onMouseDragged="#handleMouseDragged" mnemonicParsing="false" prefHeight="57.0" prefWidth="500.0" style="-fx-background-color: #1E1E1E; -fx-background-radius: 10;" textFill="#7d7878" AnchorPane.topAnchor="-10.0" />
-      <Label fx:id="label_name" layoutX="67.0" layoutY="6.0" prefHeight="38.0" maxWidth="400.0" text="杜嘉雯" textFill="WHITE">
+      <Button fx:id="button_top" onMouseDragged="#handleMouseDragged" onMousePressed="#handleMousePressed" layoutX="-2.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="500.0" style="-fx-background-color: #1E1E1E; -fx-background-radius: 10;" textFill="#7d7878" AnchorPane.topAnchor="-10.0" />
+      <Label fx:id="label_name" layoutX="59.0" layoutY="6.0" prefHeight="38.0" maxWidth="180.0" text="杜嘉雯" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
       <Button layoutX="442.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: #1e1e1e;" />
-      <VBox fx:id="vbox_messageDisplay" layoutX="7.0" layoutY="54.0" prefHeight="294.0" prefWidth="434.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;" />
+      <ListView fx:id="listview_displayMessage" layoutX="7.0" layoutY="53.0" prefHeight="340.0" prefWidth="434.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;" />
       <VBox layoutX="447.0" layoutY="53.0" maxHeight="294.0" maxWidth="47.0" prefHeight="294.0" prefWidth="47.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10; -fx-max-height: 497; -fx-max-width: 47;">
          <children>
-            <TextField promptText="搜索" style="-fx-background-color: #1e1e1e; -fx-border-color: white; -fx-border-width: 0 0 1 0;" />
-            <Button mnemonicParsing="false" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
+            <Button fx:id="button_sousuo" mnemonicParsing="false" prefHeight="55.0" prefWidth="47.0" style="-fx-background-color: transparent;">
                <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="35.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="./src/icons8-avatar-96.png" />
+                        <Image url="./src/icons8-search-48.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
+
+            <ScrollPane fx:id="scrollPane" BorderPane.alignment="CENTER" style="-fx-background-color: transparent;" >
+               <content>
+                  <ListView fx:id="listview_friendDisplay"  prefWidth="47.0" style="-fx-background-color: transparent;" />
+               </content>
+            </ScrollPane>
+
+            <Button fx:id="button_addFriend" mnemonicParsing="false" prefHeight="55.0" prefWidth="47.0" style="-fx-background-color: transparent;">
                <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="35.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="./src/icons8-avatar-96.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="./src/icons8-avatar-96.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10; -fx-max-height: 294; -fx-max-width: 47;">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="./src/icons8-avatar-96.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="./src/icons8-avatar-96.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="./src/icons8-avatar-96.png" />
+                        <Image url="./src/icons8-add-49.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
          </children>
       </VBox>
-      <VBox layoutX="447.0" layoutY="350.0" prefHeight="97.0" prefWidth="47.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
+      <VBox layoutX="447.0" layoutY="351.0" prefHeight="90.0" prefWidth="47.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: #1e1e1e;">
+            <Button fx:id="button_send" mnemonicParsing="false" prefHeight="95.0" prefWidth="47.0" style="-fx-background-color: #1e1e1e;">
                <graphic>
-                  <ImageView fx:id="button_send" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#sendmessage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="58.0" fitWidth="30.0" onMouseClicked="#sendmessage" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="./src/icons8-send-48.png" />
+                        <Image url="./src/icons8-enter-key-100.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
          </children>
       </VBox>
-      <Button fx:id="button_exit" onMouseClicked="#exit"  layoutX="451.0" layoutY="6.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="16.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
+      <Button  fx:id="button_exit"  onMouseClicked="#exit" layoutX="451.0" layoutY="6.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="16.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
          <graphic>
             <ImageView  fitHeight="30.0" fitWidth="30.0"  pickOnBounds="true" preserveRatio="true">
                <image>
@@ -102,7 +72,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="button_suoXiao" onMouseClicked="#suoXiao" layoutX="420.0" layoutY="9.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="16.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
+      <Button  fx:id="button_suoXiao" onMouseClicked="#suoXiao" layoutX="420.0" layoutY="9.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="16.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;">
          <graphic>
             <ImageView  fitHeight="25.0" fitWidth="25.0"  pickOnBounds="true" preserveRatio="true">
                <image>
@@ -111,10 +81,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextArea fx:id="text_messageInput" layoutX="5.0" layoutY="352.0" onKeyPressed="#toButtonSendMessage" prefHeight="97.0" prefWidth="434.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;" />
       <Button fx:id="button_avatar" layoutX="-2.0" layoutY="-1.0" mnemonicParsing="false" onMouseClicked="#displayPersonalMessage" style="-fx-background-color: transparent; -fx-background-radius: 10;">
          <graphic>
-            <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="avatar_imaga" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="./src/icons8-avatar-96.png" />
                </image>
@@ -125,10 +94,16 @@
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="./src/icons8-online-48.png" />
+                  <Image url="./src/icons8-online-11.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
+      <TextField fx:id="text_input" layoutX="8.0" layoutY="398.0" prefHeight="45.0" prefWidth="434.0" style="-fx-background-color: #1e1e1e; -fx-background-radius: 10;-fx-text-fill:white; -fx-border-radius: 10;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+
    </children>
 </AnchorPane>

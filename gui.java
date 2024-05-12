@@ -48,6 +48,7 @@ public class gui extends Application{
     }
     public void sendMessageTouser(String context){
         Platform.runLater(()->{
+            
         });
     }
 }

@@ -36,8 +36,8 @@
             <Font name="System Bold Italic" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="text_no" alignment="CENTER" layoutX="179.0" layoutY="201.0" onKeyPressed="#toPasswdInput" prefHeight="24.0" prefWidth="142.0" promptText="请输入账号" style="-fx-border-color: white; -fx-background-color: black; -fx-border-width: 0 0 0.5 0;" />
-      <PasswordField fx:id="text_passwd" alignment="CENTER" layoutX="179.0" layoutY="264.0" onKeyPressed="#finpassowrd" prefHeight="24.0" prefWidth="142.0" promptText="请输入备用密码" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 0 0 0.5 0;" />
+      <TextField fx:id="text_no" alignment="CENTER" layoutX="179.0" layoutY="201.0" onKeyPressed="#toPasswdInput" prefHeight="24.0" prefWidth="142.0" promptText="请输入账号" style="-fx-border-color: white;-fx-text-fill:white;  -fx-background-color: black; -fx-border-width: 0 0 0.5 0;" />
+      <PasswordField fx:id="text_passwd" alignment="CENTER" layoutX="179.0" layoutY="264.0" onKeyPressed="#finpassowrd" prefHeight="24.0" prefWidth="142.0" promptText="请输入备用密码" style="-fx-background-color: black;-fx-text-fill:white;  -fx-border-color: white; -fx-border-width: 0 0 0.5 0;" />
       <Button id="button_login" fx:id="button_findPassword" layoutX="205.0" layoutY="339.0" mnemonicParsing="false" onMouseClicked="#findpassword" style="-fx-background-color: gray; -fx-background-radius: 5;" text="找回密码" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">

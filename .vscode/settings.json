@@ -20,5 +20,7 @@
     },
     "java.project.sourcePaths": [
         "."
-    ]
+    ],
+    "files.autoSave": "onFocusChange",
+    "editor.fontSize": 16
 }

@@ -2,6 +2,7 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -87,33 +88,16 @@ public class toServer extends Thread{
         System.out.println("avatar send successfully.");
     }
     
-
-    public static void sendAvatar_faild(String path){
-        cout(6, "00000", Main.mine.getOwo_no());
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        try{
-            File avatarPath = new File(path);
-            FileInputStream fis = new FileInputStream(avatarPath);
-            OutputStream outputstream =  scoket.getOutputStream();
-            
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead=fis.read(buffer))!=-1){
-                outputstream.write(buffer,0,bytesRead);
-            }
-            System.out.println("file send successfully.");
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+    public void addFriend(String owo){
+        cout(7, owo, "want to be your friend!");
+    }
+    public void getFriend(String owo){
+        cout(8, owo, "get this want");
+    }
+    public void getAvatar(String owo){
+        cout(9, "00000", owo);
     }
 
-    
     public void getMessage(){
         if(System.currentTimeMillis()-connectionLastTime>5000){
             loseConnection();
@@ -123,22 +107,51 @@ public class toServer extends Thread{
             if(scoket.getInputStream().available()>0){
                 ObjectInputStream ois = new ObjectInputStream(scoket.getInputStream());
                 message messageRecvied = (message)ois.readObject();
-                if(messageRecvied.getType()==4){
-                    connectionLastTime = System.currentTimeMillis();
-                }
-                else if(messageRecvied.getType()==1){
-                    String message = messageRecvied.getSender()+":"+messageRecvied.getMessage();
-                    System.out.println(message);
-                    //通过当前场景通过控件id获取控件
-                    TextArea messageDisplay = (TextArea)gui.currentScene.lookup("#messageDisplay");
-                    messageDisplay.appendText(message+"\n");
-                }
+                messageDO(messageRecvied);
             }
         }
         catch(Exception e){
             e.printStackTrace();
         }
     }
+    
+    public void messageDO(message messageRecvied) throws IOException{
+        if(messageRecvied.getType()==4){
+            connectionLastTime = System.currentTimeMillis();
+        }
+        else if(messageRecvied.getType()==1){
+            String message = messageRecvied.getSender()+":"+messageRecvied.getMessage();
+            System.out.println(message);
+            //通过当前场景通过控件id获取控件
+            TextArea messageDisplay = (TextArea)gui.currentScene.lookup("#messageDisplay");
+            messageDisplay.appendText(message+"\n");
+        }
+        else if(messageRecvied.getType()==7){
+            System.out.println("get friend applycation from "+messageRecvied.getSender());
+            //处理
+        }
+        else if(messageRecvied.getType()==6){
+            System.out.println("get avatar from "+messageRecvied.getSender());
+            byte[] imagebytes = Base64.getDecoder().decode(messageRecvied.getMessage());
+            File outputFile = new File("./src/useravatar/"+messageRecvied.getSender()+".png");
+            if(!outputFile.exists()){
+                outputFile.createNewFile();
+            }
+            FileOutputStream fops = new FileOutputStream(outputFile);
+            fops.write(imagebytes);
+            fops.flush();
+            fops.close();
+            System.out.println("save avatar from "+messageRecvied.getSender());
+        }
+        else if(messageRecvied.getType()==8){
+            System.out.println("friend applycation pass from "+messageRecvied.getSender());
+            //处理
+        }
+    }
+
+
+
+    
     private void beat(){
         if(System.currentTimeMillis() - heartBeatLastTime >= 2000){
             cout(3,"00000","heartBeat");

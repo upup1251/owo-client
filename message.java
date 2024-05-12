@@ -8,7 +8,10 @@ public class message implements Serializable{
     //3:发送心跳包
     //4:回复心跳包
     //5:个人信息更新
-    //6:发送图片到服务器
+    //6:发送头像
+    //7:添加好友
+    //8:同意好友申请
+    //9:下载头衔申请
     private String sender;
     private String accepter;
     private String message;

@@ -37,8 +37,8 @@
             <Font name="System Bold Italic" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="text_no" alignment="CENTER" layoutX="179.0" layoutY="201.0" onKeyPressed="#toPasswdInput" prefHeight="24.0" prefWidth="142.0" promptText="请输入账号" style="-fx-border-color: white; -fx-background-color: black; -fx-border-width: 0 0 0.5 0;" />
-      <PasswordField fx:id="text_passwd" alignment="CENTER" layoutX="179.0" layoutY="264.0" onKeyPressed="#login" prefHeight="24.0" prefWidth="142.0" promptText="请输入密码" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 0 0 0.5 0;" />
+      <TextField fx:id="text_no"  alignment="CENTER" layoutX="179.0" layoutY="201.0" onKeyPressed="#toPasswdInput" prefHeight="24.0" prefWidth="142.0" promptText="请输入账号" style="-fx-border-color: white; -fx-background-color: black;-fx-text-fill:white; -fx-border-width: 0 0 0.5 0;" />
+      <PasswordField fx:id="text_passwd" alignment="CENTER" layoutX="179.0" layoutY="264.0" onKeyPressed="#login" prefHeight="24.0" prefWidth="142.0" promptText="请输入密码" style="-fx-background-color: black; -fx-border-color: white;-fx-text-fill:white;  -fx-border-width: 0 0 0.5 0;" />
       <Button id="button_login" fx:id="button_login" layoutX="217.0" layoutY="340.0" mnemonicParsing="false" onAction="#loginInto" style="-fx-background-color: gray; -fx-background-radius: 5;" text="登录" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="21.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -53,7 +53,7 @@
             <Image url="./src/icons8-heart-64.png" />
          </image>
       </ImageView>
-      <MenuButton layoutX="465.0" layoutY="420.0" mnemonicParsing="false" popupSide="TOP" style="-fx-background-color: black;" textFill="WHITE">
+      <MenuButton layoutX="456.0" layoutY="410.0" mnemonicParsing="false" popupSide="TOP" style="-fx-background-color: black;" textFill="WHITE">
         <items>
           <MenuItem fx:id="button_register" mnemonicParsing="false" onAction="#button_register" text="注册账号">
                <graphic>
@@ -75,7 +75,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="./src/icons8-help-64.png" />
+                  <Image url="./src/icons8-help-48.png" />
                </image>
             </ImageView>
          </graphic>
