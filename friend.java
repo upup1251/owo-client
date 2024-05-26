@@ -1,10 +1,13 @@
 import com.mysql.cj.jdbc.exceptions.SQLError;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.css.converter.FontConverter;
 
 public class friend {
-    public static ArrayList friends;
+    public static ObservableList<friend> friends = FXCollections.observableArrayList();
+
     private String fname;
     private String fowo;
     private String fbeizhu;

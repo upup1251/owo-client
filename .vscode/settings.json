@@ -10,7 +10,16 @@
             "/lib/jvm/javafx-sdk-11.0.2/lib/javafx-swt.jar",
             "/lib/jvm/javafx-sdk-11.0.2/lib/javafx.web.jar",
             "/usr/share/java/mysql-connector-java.jar",
-            "/lib/jvm/javafx-sdk-11.0.2/lib/javafx.graphics.jar"
+            "/lib/jvm/javafx-sdk-11.0.2/lib/javafx.graphics.jar",
+            "/usr/lib/jvm/javafx-sdk-22.0.1/lib/javafx.base.jar",
+            "/usr/lib/jvm/javafx-sdk-22.0.1/lib/javafx.controls.jar",
+            "/usr/lib/jvm/javafx-sdk-22.0.1/lib/javafx.fxml.jar",
+            "/usr/lib/jvm/javafx-sdk-22.0.1/lib/javafx.graphics.jar",
+            "/usr/lib/jvm/javafx-sdk-22.0.1/lib/javafx.media.jar",
+            "/usr/lib/jvm/javafx-sdk-22.0.1/lib/javafx.swing.jar",
+            "/usr/lib/jvm/javafx-sdk-22.0.1/lib/javafx.web.jar",
+            "/usr/lib/jvm/javafx-sdk-22.0.1/lib/javafx-swt.jar",
+            "/usr/lib/jvm/mysql-connector-j-8.4.0/mysql-connector-j-8.4.0.jar"
         ],
         "exclude": [
             "/home/upupup/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-linux.jar",

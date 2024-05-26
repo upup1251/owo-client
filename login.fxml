@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="login_control" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="login_control" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="500.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="button_top" layoutX="-2.0" onMousePressed="#handleMousePressed" onMouseDragged="#handleMouseDragged" mnemonicParsing="false" prefHeight="57.0" prefWidth="500.0" style="-fx-background-color: transparent; -fx-background-radius: 10;" textFill="#7d7878" AnchorPane.topAnchor="-10.0" />
     <Button fx:id="button_exit" onMouseClicked="#exit"  layoutX="451.0" layoutY="6.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="16.0" style="-fx-background-color: transparent; ">
@@ -23,7 +23,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="button_suoXiao" onMouseClicked="#suoXiao" layoutX="420.0" layoutY="9.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="16.0" style="-fx-background-color: transparent; ">
+      <Button fx:id="button_suoXiao" onMouseClicked="#suoXiao" layoutX="410.0" layoutY="9.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="16.0" style="-fx-background-color: transparent; ">
          <graphic>
             <ImageView  fitHeight="25.0" fitWidth="25.0"  pickOnBounds="true" preserveRatio="true">
                <image>
@@ -53,7 +53,7 @@
             <Image url="./src/icons8-heart-64.png" />
          </image>
       </ImageView>
-      <MenuButton layoutX="456.0" layoutY="410.0" mnemonicParsing="false" popupSide="TOP" style="-fx-background-color: black;" textFill="WHITE">
+      <MenuButton fx:id="button_help" layoutX="456.0" layoutY="410.0" mnemonicParsing="false" popupSide="TOP" style="-fx-background-color: black;" textFill="WHITE">
         <items>
           <MenuItem fx:id="button_register" mnemonicParsing="false" onAction="#button_register" text="注册账号">
                <graphic>

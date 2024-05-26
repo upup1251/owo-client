@@ -19,6 +19,7 @@ import javafx.stage.StageStyle;
 
 public class gui extends Application{
     public static Scene currentScene;
+    public static String currentTarget="00000";
     public static void gui_main(String[] args) {
         launch(args);
     }  

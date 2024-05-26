@@ -2,7 +2,6 @@ import java.sql.*;
 import java.io.File;
 import java.io.IOException;
 
-import com.mysql.cj.callback.FidoAuthenticationCallback;
 import com.mysql.cj.protocol.Resultset;
 import com.mysql.cj.xdevapi.PreparableStatement;
 
@@ -65,6 +64,10 @@ public class connectToSql {
             while (rs.next()) {
                 message messageToTake = new message(Integer.parseInt(rs.getString("type")), rs.getString("sender"), rs.getString("accpter"), rs.getString("message"));
                 Main.server.messageDO(messageToTake);
+                sql = "delete from message where accpter=?";
+                prestatement = con.prepareStatement(sql);
+                prestatement.setString(1, Main.mine.getOwo_no());
+                prestatement.executeUpdate();
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -72,7 +75,7 @@ public class connectToSql {
         }
     }
     public void getFriendList(){
-        String sql = "select usr1 from friend where usr2=?";
+        String sql = "select usr1,beizhu1 from friend where usr2=?";
         try {
             prestatement = con.prepareStatement(sql);
             prestatement.setString(1, Main.mine.owo_no);
@@ -83,38 +86,39 @@ public class connectToSql {
                 sql = "select username,contact from usr where id=?";
                 prestatement = con.prepareStatement(sql);
                 prestatement.setString(1, usr1_owo);
-                rs = prestatement.executeQuery();
+                ResultSet rs1 = prestatement.executeQuery();
+                rs1.next();
                 String avatarPath = "./src/useravatar/"+usr1_owo+".png";
                 File file = new File(avatarPath);
                 if(file.exists()){
-                    friend.friends.add(new friend(usr1_owo, rs.getString("username"), usr1beizhu, rs.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
+                    friend.friends.add(new friend(usr1_owo, rs1.getString("username"), usr1beizhu, rs1.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
                 }
                 else{
                     Main.server.getAvatar(usr1_owo);
-                    friend.friends.add(new friend(usr1_owo, rs.getString("username"), usr1beizhu, rs.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
+                    friend.friends.add(new friend(usr1_owo, rs1.getString("username"), usr1beizhu, rs1.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
                 }
             }
-            sql = "select usr2 from friend where usr1=?";
+            sql = "select usr2,beizhu2 from friend where usr1=?";
             prestatement = con.prepareStatement(sql);
             prestatement.setString(1, Main.mine.owo_no);
             rs = prestatement.executeQuery();
             while (rs.next()) {
-                String usr1_owo = rs.getString("usr1");
-                String usr1beizhu = rs.getString("beizhu1");
+                String usr2_owo = rs.getString("usr2");
+                String usr2beizhu = rs.getString("beizhu2");
                 sql = "select username,contact from usr where id=?";
                 prestatement = con.prepareStatement(sql);
-                prestatement.setString(1, usr1_owo);
-                rs = prestatement.executeQuery();
-                String avatarPath = "./src/useravatar/"+usr1_owo+".png";
+                prestatement.setString(1, usr2_owo);
+                ResultSet rs1 = prestatement.executeQuery();
+                rs1.next();
+                String avatarPath = "./src/useravatar/"+usr2_owo+".png";
                 File file = new File(avatarPath);
                 if(file.exists()){
-                    friend.friends.add(new friend(usr1_owo, rs.getString("username"), usr1beizhu, rs.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
+                    friend.friends.add(new friend(usr2_owo, rs1.getString("username"), usr2beizhu, rs1.getString("contact"), "./src/useravatar/"+usr2_owo+".png"));
                 }
                 else{
-                    Main.server.getAvatar(usr1_owo);
-                    friend.friends.add(new friend(usr1_owo, rs.getString("username"), usr1beizhu, rs.getString("contact"), "./src/useravatar/"+usr1_owo+".png"));
+                    Main.server.getAvatar(usr2_owo);
+                    friend.friends.add(new friend(usr2_owo, rs1.getString("username"), usr2beizhu, rs1.getString("contact"), "./src/useravatar/"+usr2_owo+".png"));
                 }
-
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block

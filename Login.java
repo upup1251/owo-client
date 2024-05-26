@@ -30,6 +30,8 @@ public class Login {
             statement.setString(6, avatarPathInService);
             Main.mine.setAvatarPath(avatarPath);
             statement.executeUpdate();
+
+            register_control.notified("您的id为"+String.format("%05d", usrs_num));
             
             login(String.format("%05d", usrs_num), password);
             Main.server.cout(1, "00000", Main.mine.getOwo_no());
@@ -62,12 +64,14 @@ public class Login {
                 else{
                     System.out.println("the password is incorrected!");
                     System.out.println("please try again.");
+                    login_control.notified("密码错误，请重试！");
                     return false;
 
                 }
             }
             else{
                 System.out.println("the usr is not existed.");
+                login_control.notified("用户不存在！");
                 System.out.println("please try again.");
                 return false;
             }

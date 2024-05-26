@@ -4,12 +4,16 @@ import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
 import java.net.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Base64;
 import java.util.Scanner;
 
@@ -50,8 +54,9 @@ public class toServer extends Thread{
         catch(Exception e){
             e.printStackTrace();
         }
-        
+        running = true;
         heartBeatLastTime = System.currentTimeMillis();
+        cout(3,"00000","heartBeat");
         connectionLastTime = System.currentTimeMillis();
         while (running) {
             beat();
@@ -65,7 +70,37 @@ public class toServer extends Thread{
         try{
             ObjectOutputStream oos = new ObjectOutputStream(scoket.getOutputStream());
             oos.writeObject(messageToSend);
-            System.out.println("message to "+accepter+" already sended.");
+            if(type ==3 ){
+                System.out.println("heartbeart!");
+            }
+            else if(type==1){
+                System.out.println("type : "+type+" message to "+accepter+" already sended.");
+                Main.messages.add(messageToSend);
+                Main.currentmessages.add(messageToSend);
+            }
+            else if(type == 5){
+                System.out.println("change mysql for "+message);
+                if(message.equals("avatar_path")){
+                    return;
+                }
+                String sql = "update usr set "+message+" = ? where id = "+Main.mine.getOwo_no();
+                PreparedStatement prestatement = Main.sqls.getCon().prepareStatement(sql);
+                System.out.println(message);
+                if(message.equals("username")){
+                    System.out.println("name:"+Main.mine.getname());
+                    prestatement.setString(1,Main.mine.getname());
+                }
+                else if(message.equals("contact")){
+                    prestatement.setString(1, Main.mine.getcontact());
+                }
+                else if(message.equals("password")){
+                    prestatement.setString(1, Main.mine.getPassword());
+                }
+                else if(message.equals("alt_password")){
+                    prestatement.setString(1, Main.mine.getPassword());
+                }
+                prestatement.executeUpdate();
+            }
         }
         catch(Exception e){
             e.printStackTrace();
@@ -88,11 +123,28 @@ public class toServer extends Thread{
         System.out.println("avatar send successfully.");
     }
     
-    public void addFriend(String owo){
-        cout(7, owo, "want to be your friend!");
-    }
-    public void getFriend(String owo){
-        cout(8, owo, "get this want");
+    public void addFriend(String owo) throws SQLException{
+        String sql = "select username,contact from usr where id=?";
+        PreparedStatement prestatement = Main.sqls.getCon().prepareStatement(sql);
+        prestatement.setString(1, owo);
+        ResultSet rs = prestatement.executeQuery();
+        if(rs.next()){
+            getAvatar(owo);
+            friend.friends.add(new friend(owo, rs.getString("username"), rs.getString("username"), rs.getString("contact"), "./src/useravatar/"+owo+"png"));
+            sql = "insert into friend values(?,?,?,?)";
+            prestatement = Main.sqls.getCon().prepareStatement(sql);
+            prestatement.setString(1, Main.mine.getOwo_no());
+            prestatement.setString(2, owo);
+            prestatement.setString(3, Main.mine.getOwo_no());
+            prestatement.setString(4, owo);
+            prestatement.executeUpdate();
+            message1_control.notified("已添加"+owo+" 为好友！");
+            System.out.println("add successfully!current friend num is "+friend.friends.size());
+        }
+        else{
+            System.out.println("target use not exists");
+            message1_control.notified(owo+" 不存在");
+        }
     }
     public void getAvatar(String owo){
         cout(9, "00000", owo);
@@ -100,8 +152,13 @@ public class toServer extends Thread{
 
     public void getMessage(){
         if(System.currentTimeMillis()-connectionLastTime>5000){
-            loseConnection();
-        
+            System.out.println("lose connection");
+            try {
+                sleep(50000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         try{
             if(scoket.getInputStream().available()>0){
@@ -123,15 +180,31 @@ public class toServer extends Thread{
             String message = messageRecvied.getSender()+":"+messageRecvied.getMessage();
             System.out.println(message);
             //通过当前场景通过控件id获取控件
-            TextArea messageDisplay = (TextArea)gui.currentScene.lookup("#messageDisplay");
-            messageDisplay.appendText(message+"\n");
+            //TextArea messageDisplay = (TextArea)gui.currentScene.lookup("#messageDisplay");
+            //messageDisplay.appendText(message+"\n");
+
+            Platform.runLater(()->{
+                Main.messages.add(messageRecvied);
+                Main.currentmessages.add(messageRecvied);  
+            });
+                         
+        }
+        else if(messageRecvied.getType()==5){
+            if(messageRecvied.getMessage().equals("avatar_path")){
+                getAvatar(messageRecvied.getSender());
+                
+                
+            }
+            else{
+                //有点懒了属于是
+                Main.sqls.getFriendList();
+            }
         }
         else if(messageRecvied.getType()==7){
             System.out.println("get friend applycation from "+messageRecvied.getSender());
             //处理
         }
         else if(messageRecvied.getType()==6){
-            System.out.println("get avatar from "+messageRecvied.getSender());
             byte[] imagebytes = Base64.getDecoder().decode(messageRecvied.getMessage());
             File outputFile = new File("./src/useravatar/"+messageRecvied.getSender()+".png");
             if(!outputFile.exists()){
@@ -147,6 +220,7 @@ public class toServer extends Thread{
             System.out.println("friend applycation pass from "+messageRecvied.getSender());
             //处理
         }
+
     }
 
 
