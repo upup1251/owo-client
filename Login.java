@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.sql.ResultSet;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.PreparedStatement;
 
 public class Login {
@@ -30,6 +33,16 @@ public class Login {
             statement.setString(6, avatarPathInService);
             Main.mine.setAvatarPath(avatarPath);
             statement.executeUpdate();
+
+
+            File target = new File("./src/useravatar/"+Main.mine.getOwo_no()+".png");
+            File source = new File(avatarPath);
+            try {
+                Files.copy(source.toPath(),target.toPath());
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
 
             register_control.notified("您的id为"+String.format("%05d", usrs_num));
             

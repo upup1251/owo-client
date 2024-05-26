@@ -133,7 +133,13 @@ public class message1_control {
         
         System.out.println("scene loading ...");
         File file = new File(Main.mine.getAvatarPath());
-        Image image = new Image(file.toURI().toString());
+        if(file.exists()){
+            Image image = new Image(file.toURI().toString());
+        }
+        else{
+
+        }
+        Image image = new Image("./src/useravatar/-1.png");
         avatar_imaga.setImage(image);
         label_name.setText(Main.mine.getname());
 
@@ -169,14 +175,13 @@ public class message1_control {
         listview_friendDisplay.setItems(friend.friends);
         //listview_friendDisplay = new ListView<>(friend.friends);
         listview_friendDisplay.setCellFactory(param -> new friendcell());
-        listview_friendDisplay.setStyle("-fx-background-color: transparent; -fx-padding: 0; -fx-background-insets: 0; -fx-border-width: 0;");
+        listview_friendDisplay.setStyle("-fx-background-color: #1e1e1e; -fx-padding: 0; -fx-background-insets: 0; -fx-border-width: 0;");
         scrollPane.setStyle("-fx-background-color:#1e1e1e");
         
         scrollPanemessage.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPanemessage.setVbarPolicy(ScrollBarPolicy.NEVER);
         listview_displayMessage.setItems(Main.currentmessages);
         listview_displayMessage.setCellFactory(param -> new messageCell());
-        listview_friendDisplay.setStyle("-fx-background-color: transparent; -fx-padding: 0; -fx-background-insets: 0; -fx-border-width: 0;");
         scrollPane.setStyle("-fx-background-color:black");
 
 
@@ -218,7 +223,12 @@ public class message1_control {
                 Image image1 = new Image(selectedFile.toURI().toString());
                 File target = new File("./src/useravatar/"+Main.mine.getOwo_no()+".png");
                 File source = new File(avatarPath);
-                source.renameTo(target);
+                try {
+                    Files.copy(source.toPath(),target.toPath());
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
                 avatar_imaga.setImage(image1);
             }
         });
@@ -512,11 +522,18 @@ public class message1_control {
                 });
 
                 File file = new File("./src/useravatar/"+item.getOwo()+".png");
-                image.setImage(new Image(file.toURI().toString()));
+                if(file.exists()){
+                    image.setImage(new Image(file.toURI().toString()));
+                }
+                else{
+                    image.setImage(new Image("./src/useravatar/-1.png"));;
+                }
+                //image.setImage(new Image(file.toURI().toString()));
                 setGraphic(content);
             }
             setBackground(new Background(new BackgroundFill(Color.web("#1e1e1e"), CornerRadii.EMPTY, null))); // 设置背景为透明
             }
+            
         }
 
     public class messageCell extends ListCell<message> {
@@ -545,7 +562,13 @@ public class message1_control {
             }
             else{
                 File file = new File("./src/useravatar/"+item.getSender()+".png");
-                image.setImage(new Image(file.toURI().toString()));
+                if(!file.exists()){
+                    image.setImage(new Image("./src/useravatar/-1.png"));
+                }
+                else{
+                    image.setImage(new Image(file.toURI().toString()));
+                    //Image image = new Image(file.toURI().toString());
+                }
 
                 content.getChildren().clear();
                 if(item.getSender().equals(Main.mine.getOwo_no()) && item.getAccepter().equals(gui.currentTarget)){

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.swing.event.MouseInputListener;
 
@@ -127,6 +128,7 @@ public class register_control {
 
             Image image = new Image(selectedFile.toURI().toString());
             avatar_imag.setImage(image);
+
         }
         else{
             avatarPath = "null";

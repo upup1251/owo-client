@@ -1,4 +1,6 @@
 import com.mysql.cj.jdbc.exceptions.SQLError;
+
+import java.io.File;
 import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
@@ -20,6 +22,10 @@ public class friend {
         fbeizhu = beizhu;
         fcontact = contact;
         avatar_path = path;
+        File file = new File(path);
+        if(!file.exists()){
+            avatar_path = "./src/useravatar/-1.png";
+        }
     }
     public void setName(String fname1){
         fname = fname1;
